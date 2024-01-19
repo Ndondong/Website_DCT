@@ -1,0 +1,91 @@
+{% extends "base-main.html" %}
+{% block title %}{{ page|title }}{% endblock %}
+{% block breadcrumb %}{{ page|title }}{% endblock %}
+{% block page %}{{ page|title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+      <div class="col-xl-12 col-sm-12 mb-xl-0 mb-4">
+            <div class="card">
+                  <div class="card-header pb-0">
+                        <h6>Penyisipan</h6>
+                  </div>
+                  <div class="card-body">
+                        {% for message in messages %}
+                        <div class="container-fluid p-0">
+                              <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% endif %} text-white alert-dismissible" role="alert" >
+                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;
+                                    {{ message }}
+                              </div>
+                        </div>
+                        {% endfor %}
+
+                        {% if stage == 'input' %}
+                        <form autocomplete="off" method="post" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              <div class="row g-4">
+                                    <div class="col-xl-6 col-sm-6">
+                                          <div class="img-upload-box px-3">
+                                                <center>
+                                                      <p class="mt-1">Gambar Asli</p>
+                                                      <img style="max-height: 200px;" class="center" id="cover-image" src="/media/host.jpg" />
+                                                </center>
+                                                <br>
+                                                <div class="input-group mb-3">
+                                                      {{form.host_img}}
+                                                </div>
+                                          </div>
+                                          
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6">
+                                          <div class="img-upload-box px-3">
+                                                <center>
+                                                      <p class="mt-1">Watermark</p>
+                                                      <img style="max-height: 200px;" class="center" id="watermark-image" src="/media/watermark.jpg" />
+                                                </center>
+                                                <br>
+                                                <div class="input-group mb-3">
+                                                      {{form.wm_img}}
+                                                </div>
+                                          </div>
+                                          
+                                    </div>
+                                    <div class="col-xl-12 col-sm-12">
+                                          <input type="submit" class="btn btn-primary mt-2 w-100" value="Sisipkan">
+                                    </div>
+                              </div>
+                        </form>
+                        {% elif stage == 'output' %}
+                        <div class="row">
+                              <div class="col-xl-12 col-sm-12">
+                                    <div class="img-upload-box px-3 mb-3">
+                                          <center>
+                                                <p class="mt-1">Gambar Berwatermark</p>
+                                                <img style="max-height: 200px;" class="mb-4" id="watermarked-image" src="{{ result.url }}" />
+                                          </center>
+
+                                    </div>
+                                    <div class="row">
+
+
+                                          <div class="col-xl-9 col-sm-9">
+                                                <a href="{% url 'download-image' data %}">
+                                                      <button class="btn btn-success w-100" name="submit" type="submit" id="Unduh-Gambar">Unduh Gambar
+                                                      </button>
+                                                </a>
+                                          </div>
+                                          <div class="col-xl-3 col-sm-3">
+                                                <a href="{% url 'detail-penyisipan' data %}">
+                                                      <button class="btn btn-success w-100" name="submit" type="submit" id="Unduh-Gambar">Detail
+                                                      </button>
+                                                </a>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        {% endif %}
+                  </div>
+            </div>
+      </div>
+</div>
+{% endblock %}

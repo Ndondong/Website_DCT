@@ -1,0 +1,111 @@
+{% extends "base-auth.html" %}
+{% block title %}Register{% endblock %}
+{% block page %}Register{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="ro justify-content-center">
+    <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+      <div class="card mt-lg-n15 mt-md-n11 mt-n10">
+        <div class="card-header text-center pt-4">
+          <h4 class="font-weight-bolder">Daftar</h4>
+          <p class="mb-0">Masukkan nama, email, and password anda untuk melakukan pendaftaran</p>
+        </div>
+        <div class="card-body">
+          {% for message in messages %}
+          <div class="container-fluid p-0">
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% endif %} text-white alert-dismissible" role="alert" >
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;
+              {{ message }}
+            </div>
+          </div>
+          {% endfor %}
+          <form class="login-form" method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-12">
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+              <div class="col-md-12">
+                <div class="form-group position-relative">
+                  <label>Your Email <span class="text-danger">*</span></label>
+                  {{form.email}}
+                </div>
+                {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+              <div class="col-md-12">
+                <div class="form-group position-relative">
+                  <label>Username <span class="text-danger">*</span></label>
+                  {{form.username}}
+                </div>
+                {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+              <div class="col-md-12">
+                <div class="form-group position-relative">
+                  <label>Password <span class="text-danger">*</span></label>
+                  {{form.password1}}
+                </div>
+                {% if form.password1.errors %}
+                {% for error in form.password1.errors %}
+                <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+              <div class="col-md-12">
+                <div class="form-group position-relative">
+                  <label>Confirm Password <span class="text-danger">*</span></label>
+                  {{form.password2}}
+                </div>
+                {% if form.password2.errors %}
+                {% for error in form.password2.errors %}
+                <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+                </div>
+              </div>
+              {% endfor %}
+              {% endif %}
+              <div class="col-md-12">
+                <button class="btn btn-primary w-100" type="submit" >Register</button>
+              </div>
+            </div>
+          </form>
+          
+        </div>
+        <div class="card-footer text-center pt-0 px-lg-2 px-1">
+          <p class="mb-3 text-sm mx-auto">
+            Sudah punya akun?
+            <a href="{% url 'login' %}" class="text-primary text-gradient font-weight-bold">Login</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

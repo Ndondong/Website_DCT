@@ -1,0 +1,77 @@
+{% extends "base-main.html" %}
+{% block title %}{{ page|title }}{% endblock %}
+{% block breadcrumb %}{{ page|title }}{% endblock %}
+{% block page %}{{ page|title }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header pb-0">
+				<h6>Detail</h6>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-6">
+						<center>
+							
+							<p>Cover:</p>
+							<img style="max-height: 200px; max-width: 200px;" class="mb-4" id="img-cover" src="{{ image.url }}" />
+							<br>
+							<a href="{% url 'download-host' data.embed_id %}" class="btn btn-primary text-white mt-3">Download Here</a>
+						</center>
+					</div><!-- 
+					<div class="col-3">
+						Cover to YUV:
+						<img style="max-height: 200px; max-width: 200px;" class="mb-4" id="img-material-cover" src="../{{ img.material_cover }}" />
+					</div> -->
+					<div class="col-6">
+						<center>
+							
+							<p>Watermark:</p>
+							<img style="max-height: 200px; max-width: 200px;" class="mb-4" id="img-water" src="{{ water.url }}" />
+							<br>
+							<a href="{% url 'download-watermark' data.embed_id %}" class="btn btn-primary text-white mt-3">Download Here</a>
+						</center>
+					</div><!-- 
+					<div class="col-3">
+						Grayscaled Watermark:
+						<img style="max-height: 200px; max-width: 200px;" class="mb-4" id="img-material-water" src="../{{ img.material_water }}" />
+					</div> -->
+				</div>
+				<p>Gambar Ori:</p>
+				<p>{{ori}}</p>
+				<hr>
+				<p>Gambar 2YUV:</p>
+				<p>{{yuv}}</p>
+				<hr>
+				<p>Hasil Transformasi Watermark:</p>
+				<p>{{wat}}</p>
+				<hr>
+				<p>Hasil Transformasi Gambar:</p>
+				<p>{{cov}}</p>
+				<hr>
+				<p>Ukuran Gambar: {{ww}} . {{wh}}</p>
+				<hr>
+				<p>Embed Pos:</p>
+				
+				<p>{{embed_pos}}</p>
+				<hr>
+
+				<p>Array Cover: {{v_1}}</p><hr>
+				<p>Hasil DCT Cover: {{v_2}}</p><hr>
+				<p>Penyisipan: {{v_3}}</p><hr>
+				<p>Hasil IDCT Cover: {{v_4}}</p><hr>
+				<center>
+					
+				<p>Hasil gambar penyisipan:</p>
+				<img style="max-height: 200px;" class="mb-4" id="img-res" src="{{ result.url }}" />
+				<br>
+				<a href="{% url 'download-image' data.embed_id %}" class="btn btn-primary text-white mt-3">Download Here</a>
+				</center>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

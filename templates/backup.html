@@ -1,0 +1,81 @@
+{% if session['role'] == '0' %}Halaman Admin{% elif session['role'] == '1' %}Halaman Personal{% else %}Not Available{% endif %}
+
+{% if session is not none %}{{ session['nama'].title() }}{% endif %}
+{% block title %}{{ page|title }}{% endblock %}
+{% static '' %}
+
+
+{% url 'profile' %}
+{% url 'users' %}
+{% url 'logout' %}
+
+<div class="col-lg-5">
+          <div class="card">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">User Baru</h6>
+            </div>
+            <div class="card-body p-3">
+              <ul class="list-group">
+                {% if data.users_update is not none %}
+                  {% for user in data.users_update %}
+                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                      <div class="d-flex align-items-center">
+                        <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+                        <div class="d-flex flex-column">
+                          <h6 class="mb-1 text-dark text-sm">{{user.nama.title()}}</h6>
+                          <span class="text-xs">Akun dibuat <span class="font-weight-bold">{{user.created}}</span></span>
+                        </div>
+                      </div>
+                    </li>
+                  {% endfor %}
+                {% else %}Not Available{% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- <form method="POST" action="{{ url_for('login') }}">
+                    <div class="mb-3">
+                      <input type="email" class="form-control form-control-lg" name="email" placeholder="Email" aria-label="Email" required>
+                    </div>
+                    <div class="mb-3">
+                      <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" aria-label="Password" required>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="rememberMe">
+                      <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <div class="text-center">
+                      <input class="btn btn-primary w-100 mt-4 mb-0" name="submit" type="submit" id="log_login" value="Login">
+                    </div>
+                  </form> -->
+
+                  <form method="POST" action="{{ url_for('daftar') }}">
+            <div class="mb-3">
+              <input type="text" class="form-control form-control-lg" name="nama" placeholder="Nama" aria-label="Nama" required>
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control form-control-lg" name="email" placeholder="Email" aria-label="Email" required>
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" aria-label="Password" required>
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control form-control-lg" name="password2" placeholder="Ulangi Password" aria-label="Password2" required>
+            </div>
+            <div class="form-check form-check-info text-start">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+              <label class="form-check-label" for="flexCheckDefault">
+                I agree the <a href="" class="text-dark font-weight-bolder">Terms and Conditions</a>
+              </label>
+            </div>
+            <div class="text-center">
+              <input class="btn btn-primary w-100 mt-4 mb-0" name="submit" type="submit" id="reg_register" value="Daftar">
+            </div>
+          </form>
+
+          
+      <p>Iterasi x ({{itx|length / 2}}): {{itx[:10]}} ... {{itx[-10:]}} </p>
+      <p>Iterasi y ({{ity|length / 2}}): {{ity[:10]}} ... {{ity[-10:]}} </p>

@@ -1,0 +1,24 @@
+INSTALL PYTHON
+KLIK CENTANG PAS ADD TO PATH
+kalo blm
+BIKIN DB, NAMANYA watermark-dct
+
+Installation Guide:
+1. bikin folder baru, masuk ke cmd sesuai dir folder, ekstrak .rar/zip
+2. ketik python -m venv nama_venv_terserah, enter
+3. masuk ke vnev ketik web-dct\Scripts\activate, enter
+4. kalo udh ada tulisan (nama_venv) Direktori, berarti lanjut
+5. ketik pip install django, enter, tunggu kelar
+	ketik pip install mysqlclient, enter, tunggu kelar
+	ketik pip install Pillow, enter, tunggu kelar
+	ketik pip install opencv-python, enter, tunggu kelar
+	ketik pip install django_tables2, enter, tunggu kelar
+	ketik pip install numpy, enter, tunggu kelar
+6. masuk ke dir web yg tadi diekstrak, ketik python manage.py makemigrations, enter
+7. ketik python manage.py migrate, enter
+	python manage.py createsuperuser (buat admin, masukkan usn, email, pwd)
+8. ketik python manage.py runserver (menjalankan web)
+
+cd D:\TUGAS AKHIR\web-dct
+web-dct\Scripts\activate
+python manage.py runserver
